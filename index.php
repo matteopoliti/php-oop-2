@@ -3,11 +3,25 @@ include_once __DIR__ . "/models/Product.php";
 include_once __DIR__ . "/models/Pet.php";
 include_once __DIR__ . "/models/TypeProducts.php";
 
-$gioco1 = new TypeProducts("ball", 15.90, new Pet("dog"));
+$gioco1 = new TypeProducts("Tennis ball", 15.90, new Pet("dog"));
+$gioco1->setType("game", "genre: ball");
 
-$gioco1->setType("game", "genre");
+$cuccia1 = new TypeProducts("cuccia", 50.00, new Pet("cat"));
+$cuccia1->setType("cuccia", "width: 120cm");
 
-var_dump($gioco1);
+$product1 = new TypeProducts("collare", 20.80, new Pet("dog"));
+$product1->setType("cuccia", null);
+
+$food1 = new TypeProducts("Crocchette", 10.00, new Pet("cat"));
+$food1->setType("food", "calories: 200");
+
+
+$arrayElements = [
+    $gioco1,
+    $cuccia1,
+    $product1,
+    $food1
+]
 
 
 ?>
@@ -27,35 +41,38 @@ var_dump($gioco1);
 <body>
 
     <div>
-        <div class="bg-light-subtle p-3">
+        <div class="bg-light-subtle p-3 mb-4">
             <h1 class="text-center text-uppercase text-secondary-emphasis">
                 Pet Shop
             </h1>
         </div>
 
-        <div class="row">
-            <div class="col">
-                <div class="card col" style="width: 18rem;">
-                    <img src="https://picsum.photos/id/237/200/300" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="container">
+
+            <div class="row">
+                <?php
+                foreach ($arrayElements as $element) :
+                ?>
+                    <div class="col">
+                        <div class="card col" style="width: 18rem;">
+                            <img src="<?= $element->pet->img ?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize "><?= $element->name ?></h5>
+                                <p class="card-text">Price: <?= $element->getPrice() ?>$</p>
+                                <a href="#" class="btn btn-primary">Go Shop</a>
+                            </div>
+                            <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center text-capitalize">
+                                <p>Type: <?= $element->type ?></p>
+                                <p><?= $element->details ?></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card col" style="width: 18rem;">
-                    <img src="https://picsum.photos/id/237/200/300" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
+                <?php
+                endforeach
+                ?>
 
 
+            </div>
         </div>
     </div>
 

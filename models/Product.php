@@ -2,9 +2,9 @@
 
 class Product
 {
-    protected $name;
+    public $name;
     private $price;
-    protected $pet;
+    public $pet;
 
 
     function __construct($_name, $_price, Pet $_pet)
@@ -12,5 +12,10 @@ class Product
         $this->name = $_name;
         $this->price = $_price;
         $this->pet = $_pet;
+    }
+
+    function getPrice()
+    {
+        return $this->price;
     }
 }
