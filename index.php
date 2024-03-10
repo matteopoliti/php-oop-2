@@ -3,16 +3,16 @@ include_once __DIR__ . "/models/Product.php";
 include_once __DIR__ . "/models/Pet.php";
 include_once __DIR__ . "/models/TypeProducts.php";
 
-$gioco1 = new TypeProducts("Tennis ball", 15.90, new Pet("dog"));
-$gioco1->setType("game", "genre: ball");
+$gioco1 = new TypeProducts("torre di cartone", 35.90, new Pet("cat"), "./img/gioco.jpeg");
+$gioco1->setType("game", "genre: building");
 
-$cuccia1 = new TypeProducts("cuccia", 50.00, new Pet("cat"));
+$cuccia1 = new TypeProducts("cuccia", 60.00, new Pet("dog"), "./img/cuccia.jpeg");
 $cuccia1->setType("cuccia", "width: 120cm");
 
-$product1 = new TypeProducts("collare", 20.80, new Pet("dog"));
-$product1->setType("cuccia", null);
+$product1 = new TypeProducts("collare", 19.90, new Pet("dog"), "./img/collare.jpeg");
+$product1->setType("Product", null);
 
-$food1 = new TypeProducts("Crocchette", 10.00, new Pet("cat"));
+$food1 = new TypeProducts("Scatolette", 15.00, new Pet("cat"), "./img/cibo.jpeg");
 $food1->setType("food", "calories: 200");
 
 
@@ -20,7 +20,7 @@ $arrayElements = [
     $gioco1,
     $cuccia1,
     $product1,
-    $food1
+    $food1,
 ]
 
 
@@ -54,10 +54,13 @@ $arrayElements = [
                 foreach ($arrayElements as $element) :
                 ?>
                     <div class="col">
-                        <div class="card col" style="width: 18rem;">
-                            <img src="<?= $element->pet->img ?>" class="card-img-top" alt="...">
+                        <div class="card col mb-5" style="width: 18rem;">
+                            <img src="<?= $element->getImg() ?>" class="card-img-top" alt="product">
                             <div class="card-body">
-                                <h5 class="card-title text-capitalize "><?= $element->name ?></h5>
+                                <div class="d-flex justify-content-between align-items-center ">
+                                    <h5 class="card-title text-capitalize "><?= $element->name ?></h5>
+                                    <img src="<?= $element->pet->img ?>" alt="pet" class="rounded-circle" style="width: 60px;">
+                                </div>
                                 <p class="card-text">Price: <?= $element->getPrice() ?>$</p>
                                 <a href="#" class="btn btn-primary">Go Shop</a>
                             </div>
