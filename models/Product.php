@@ -18,6 +18,9 @@ class Product
 
     function getPrice()
     {
+        if ($this->price < 0) {
+            throw new Exception('It is not a correct number');
+        }
         return $this->price;
     }
 

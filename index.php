@@ -2,17 +2,21 @@
 include_once __DIR__ . "/models/Product.php";
 include_once __DIR__ . "/models/Pet.php";
 include_once __DIR__ . "/models/TypeProducts.php";
+include_once __DIR__ . "/models/Game.php";
+include_once __DIR__ . "/models/Cuccia.php";
+include_once __DIR__ . "/models/Food.php";
+include_once __DIR__ . "/traits/TypeTrait.php";
 
-$gioco1 = new TypeProducts("torre di cartone", 35.90, new Pet("cat"), "./img/gioco.jpeg");
+$gioco1 = new Game("torre di cartone", 35.90, new Pet("cat"), "./img/gioco.jpeg");
 $gioco1->setType("game", "genre: building");
 
-$cuccia1 = new TypeProducts("cuccia", 60.00, new Pet("dog"), "./img/cuccia.jpeg");
+$cuccia1 = new Cuccia("cuccia", 60.00, new Pet("dog"), "./img/cuccia.jpeg");
 $cuccia1->setType("cuccia", "width: 120cm");
 
 $product1 = new TypeProducts("collare", 19.90, new Pet("dog"), "./img/collare.jpeg");
 $product1->setType("Product", null);
 
-$food1 = new TypeProducts("Scatolette", 15.00, new Pet("cat"), "./img/cibo.jpeg");
+$food1 = new Food("Scatolette", 15.00, new Pet("cat"), "./img/cibo.jpeg");
 $food1->setType("food", "calories: 200");
 
 
@@ -42,7 +46,7 @@ $arrayElements = [
 
     <div>
         <div class="bg-light-subtle p-3 mb-4">
-            <h1 class="text-center text-uppercase text-secondary-emphasis">
+            <h1 class="text-center text-uppercase text-warning">
                 Pet Shop
             </h1>
         </div>
@@ -61,8 +65,13 @@ $arrayElements = [
                                     <h5 class="card-title text-capitalize "><?= $element->name ?></h5>
                                     <img src="<?= $element->pet->img ?>" alt="pet" class="rounded-circle" style="width: 60px;">
                                 </div>
-                                <p class="card-text">Price: <?= $element->getPrice() ?>$</p>
-                                <a href="#" class="btn btn-primary">Go Shop</a>
+                                <p class="card-text"> <?php
+                                                        try {
+                                                            echo "Price: " . $element->getPrice() . "$";
+                                                        } catch (Exception $e) {
+                                                            echo 'Eccezione: ' . $e->getMessage();
+                                                        }  ?></p>
+                                <a href="#" class="btn btn-warning">Go Shop</a>
                             </div>
                             <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center text-capitalize">
                                 <p>Type: <?= $element->type ?></p>

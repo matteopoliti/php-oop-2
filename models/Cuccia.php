@@ -1,9 +1,7 @@
 <?php
-
 require_once __DIR__ . "../../traits/TypeTrait.php";
 
-
-class TypeProducts extends Product
+class Cuccia extends Product
 {
     use TypeTrait;
 }
